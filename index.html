@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="github-link">
+        <a href="https://github.com/RezaKargar/tic-toc-toe-go-wasm" target="_blank">Source on GitHub</a>
+    </div>
+    <div class="container">
+        <h2>Go WebAssembly Tic-Tac-Toe Game</h2>
+        <div class="players">
+            <div class="player" id="playerX">Player X</div>
+            <div class="player" id="playerO">Player O</div>
+        </div>
+        <div class="board" id="board">
+            <div id="cell-0-0" onclick="makeMove(0, 0)" class="cell" data-cell></div>
+            <div id="cell-0-1" onclick="makeMove(0, 1)" class="cell" data-cell></div>
+            <div id="cell-0-2" onclick="makeMove(0, 2)" class="cell" data-cell></div>
+            <div id="cell-1-0" onclick="makeMove(1, 0)" class="cell" data-cell></div>
+            <div id="cell-1-1" onclick="makeMove(1, 1)" class="cell" data-cell></div>
+            <div id="cell-1-2" onclick="makeMove(1, 2)" class="cell" data-cell></div>
+            <div id="cell-2-0" onclick="makeMove(2, 0)" class="cell" data-cell></div>
+            <div id="cell-2-1" onclick="makeMove(2, 1)" class="cell" data-cell></div>
+            <div id="cell-2-2" onclick="makeMove(2, 2)" class="cell" data-cell></div>
+        </div>
+        <div class="hidden" id="message-container">
+            <div id="message"></div>
+            <button id="restartButton" onclick="restart()">Restart</button>
+        </div>
+    </div>
+    <script src="wasm_exec.js"></script>
+    <script>
+        async function loadWasm() {
+            const go = new Go();
+            const wasm = await WebAssembly.instantiateStreaming(fetch("main.wasm"), go.importObject);
+            await go.run(wasm.instance);
+        }
+
+        loadWasm();
+
+        function makeMove(row, col) {
+            window.makeMove(row, col);
+        }
+
+        function restart() {
+            window.restart();
+        }
+    </script>
+</body>
+</html>
