@@ -6,10 +6,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #f0f0f0;
     font-family: 'Arial', sans-serif;
     margin: 0;
+    padding: 10px;
 }
 
 .github-link {
@@ -19,7 +20,7 @@ body {
 }
 
 .github-link a {
-    font-size: 1.2em;
+    font-size: 1em;
     padding: 10px;
     border-radius: 5px;
     transition: background-color 0.3s;
@@ -31,10 +32,13 @@ body {
 
 .container {
     text-align: center;
+    width: 100%;
+    max-width: 450px;
+    transform: translateY(-10%);
 }
 
 h2 {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .players {
@@ -44,14 +48,16 @@ h2 {
 }
 
 .player {
-    padding: 10px 20px;
+    padding: 10px;
     border: 2px solid #000;
     background-color: #fff;
-    font-size: 1.2em;
-    width: 200px;
+    font-size: 1em;
+    flex: 1;
+    margin: 0 10px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    max-width: 45%;
 }
 
 .player.active {
@@ -61,21 +67,23 @@ h2 {
 
 .board {
     display: grid;
-    grid-template-columns: repeat(3, 150px);
-    grid-template-rows: repeat(3, 150px);
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     gap: 5px;
     margin-bottom: 20px;
+    width: 100%;
+    max-width: 450px;
+    height: auto;
 }
 
 .cell {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 150px;
-    height: 150px;
     background-color: #fff;
     border: 2px solid #000;
     font-size: 5em;
+    aspect-ratio: 1;
     cursor: pointer;
 }
 
@@ -90,14 +98,15 @@ h2 {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     background-color: rgba(0, 0, 0, 0.9);
     color: #fff;
     padding: 20px;
     border-radius: 10px;
-    margin-top: 50px;
-    width: 300px;
-    height: 200px;
+    width: 80%;
+    max-width: 300px;
+    height: auto;
+    text-align: center;
 }
 
 button {
@@ -109,6 +118,7 @@ button {
     cursor: pointer;
     border: 1px solid grey;
     border-radius: 5px;
+    width: 100%;
 }
 
 button:hover {
@@ -117,4 +127,30 @@ button:hover {
 
 .hidden {
     display: none;
+}
+
+@media (max-width: 600px) {
+    .container {
+        max-width: 300px;
+    }
+
+    .players {
+        align-items: center;
+        gap: 10px;
+    }
+
+    .player {
+        max-width: 100%;
+        margin: 5px 0;
+    }
+
+    .board {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        width: 100%;
+    }
+
+    .cell {
+        font-size: 4em;
+    }
 }
